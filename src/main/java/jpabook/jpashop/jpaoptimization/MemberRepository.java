@@ -1,5 +1,6 @@
 package jpabook.jpashop.jpaoptimization;
 
+import jpabook.jpashop.jpaoptimization.domain.Member;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

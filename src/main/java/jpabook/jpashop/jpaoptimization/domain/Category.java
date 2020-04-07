@@ -1,24 +1,21 @@
-package jpabook.jpashop.jpaoptimization;
+package jpabook.jpashop.jpaoptimization.domain;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+@Getter
 @NoArgsConstructor
 @Entity
-@Getter
-public class Member {
+public class Category {
 
     @Id @GeneratedValue
+    @Column(name = "category_id")
     private Long id;
-    private String username;
 
-    @Builder
-    public Member(String username){
-        this.username = username;
-    }
+    private String name;
 }
