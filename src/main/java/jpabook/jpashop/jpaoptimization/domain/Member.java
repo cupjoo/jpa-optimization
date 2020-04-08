@@ -26,8 +26,8 @@ public class Member {
     private List<Order> orders = new ArrayList<>();
 
     @Builder
-    public Member(String username, Address address){
-        this.name = username;
+    public Member(String name, Address address){
+        this.name = name;
         this.address = address;
     }
 }
