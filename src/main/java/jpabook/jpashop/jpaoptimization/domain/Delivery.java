@@ -1,9 +1,12 @@
 package jpabook.jpashop.jpaoptimization.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import static javax.persistence.FetchType.LAZY;
 
 @Getter
 @Entity
@@ -13,7 +16,7 @@ public class Delivery {
     @Column(name = "delivery_id")
     private Long id;
 
-    @OneToOne(mappedBy = "delivery")
+    @OneToOne(mappedBy = "delivery", fetch = LAZY)
     private Order order;
 
     @Embedded
@@ -21,4 +24,13 @@ public class Delivery {
 
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status;
+
+    @Builder
+    public Delivery(Address address){
+        this.address = address;
+    }
+
+    public void changeOrder(Order order){
+        this.order = order;
+    }
 }
