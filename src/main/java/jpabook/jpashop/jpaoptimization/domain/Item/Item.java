@@ -2,6 +2,7 @@ package jpabook.jpashop.jpaoptimization.domain.Item;
 
 import jpabook.jpashop.jpaoptimization.domain.Category;
 import jpabook.jpashop.jpaoptimization.exception.NotEnoughStockException;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public abstract class Item {
 
