@@ -1,6 +1,7 @@
 package jpabook.jpashop.jpaoptimization.domain.Item;
 
 import jpabook.jpashop.jpaoptimization.domain.Category;
+import jpabook.jpashop.jpaoptimization.exception.NotEnoughPriceException;
 import jpabook.jpashop.jpaoptimization.exception.NotEnoughStockException;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -34,6 +35,18 @@ public abstract class Item {
     }
 
     // 비즈니스 로직
+    public void increasePrice(int amount){
+        this.price += amount;
+    }
+
+    public void decreasePrice(int amount){
+        int curPrice = this.price - amount;
+        if(curPrice < 0){
+            throw new NotEnoughPriceException("can't decrease price");
+        }
+        this.price = curPrice;
+    }
+
     public void addStock(int quantity){
         this.stockQuantity += quantity;
     }
