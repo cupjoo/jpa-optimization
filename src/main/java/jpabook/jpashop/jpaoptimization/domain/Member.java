@@ -31,4 +31,8 @@ public class Member {
         this.name = name;
         this.address = address;
     }
+
+    public void changeName(String name) {
+        this.name = name;
+    }
 }
