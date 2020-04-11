@@ -34,6 +34,12 @@ public abstract class Item {
         this.name = name;
     }
 
+    public void loadId(Long id){
+        if(id != null){
+            this.id = id;
+        }
+    }
+
     // 비즈니스 로직
     public void increasePrice(int amount){
         this.price += amount;
