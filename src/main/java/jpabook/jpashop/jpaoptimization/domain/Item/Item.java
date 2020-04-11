@@ -34,23 +34,16 @@ public abstract class Item {
         this.name = name;
     }
 
-    public void loadId(Long id){
-        if(id != null){
-            this.id = id;
-        }
-    }
-
     // 비즈니스 로직
-    public void increasePrice(int amount){
-        this.price += amount;
+    public void changeName(String name){
+        this.name = name;
     }
 
-    public void decreasePrice(int amount){
-        int curPrice = this.price - amount;
-        if(curPrice < 0){
+    public void changePrice(int price){
+        if(price < 0){
             throw new NotEnoughPriceException("can't decrease price");
         }
-        this.price = curPrice;
+        this.price = price;
     }
 
     public void addStock(int quantity){

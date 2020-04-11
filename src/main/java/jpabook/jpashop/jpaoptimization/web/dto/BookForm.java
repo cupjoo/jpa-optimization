@@ -33,8 +33,7 @@ public class BookForm {
     public Book toEntity(){
         Book book = Book.builder()
                 .name(name).author(author).isbn(isbn).build();
-        book.loadId(id);
-        book.increasePrice(price);
+        book.changePrice(price);
         book.addStock(stockQuantity);
         return book;
     }

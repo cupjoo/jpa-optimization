@@ -81,7 +81,7 @@ public class OrderServiceTest {
         Book book = Book.builder().author("작가1").isbn("A123")
                 .name("책 1").build();
         book.addStock(quantity);
-        book.increasePrice(amount);
+        book.changePrice(amount);
         itemService.saveItem(book);
         return book;
     }
