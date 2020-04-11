@@ -20,16 +20,16 @@ public class OrderService {
     private final MemberRepository memberRepository;
     private final ItemRepository itemRepository;
 
+    @Transactional
     public Long order(Long memberId, Long itemId, int count){
         Address address2 = Address.builder()
                 .city("Nowon").street("rojingst").zipcode("B123").build();
         Member member = memberRepository.findOne(memberId);
         Item item = itemRepository.findOne(itemId);
-
         Delivery delivery = Delivery.builder().address(member.getAddress()).build();
         OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
-        Order order = Order.createOrder(member, delivery, orderItem);
 
+        Order order = Order.createOrder(member, delivery, orderItem);
         orderRepository.save(order);
         return order.getId();
     }
@@ -40,8 +40,7 @@ public class OrderService {
         order.cancel();
     }
 
-    public List<Order> findOrders(){
-        
-        return null;
+    public List<Order> findOrders(OrderSearch orderSearch){
+        return orderRepository.findAllByString(orderSearch);
     }
 }
