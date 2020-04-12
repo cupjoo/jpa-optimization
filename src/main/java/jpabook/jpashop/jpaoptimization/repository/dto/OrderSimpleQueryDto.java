@@ -1,4 +1,4 @@
-package jpabook.jpashop.jpaoptimization.repository;
+package jpabook.jpashop.jpaoptimization.repository.dto;
 
 import jpabook.jpashop.jpaoptimization.domain.Address;
 import jpabook.jpashop.jpaoptimization.domain.Order;

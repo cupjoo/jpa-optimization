@@ -2,6 +2,7 @@ package jpabook.jpashop.jpaoptimization.repository;
 
 import jpabook.jpashop.jpaoptimization.domain.Order;
 import jpabook.jpashop.jpaoptimization.domain.OrderSearch;
+import jpabook.jpashop.jpaoptimization.repository.dto.OrderSimpleQueryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
@@ -68,10 +69,31 @@ public class OrderRepository {
 
     public List<OrderSimpleQueryDto> findOrderDtos() {
         return em.createQuery(
-                "select new jpabook.jpashop.jpaoptimization.repository.order.OrderSimpleQueryDto(o.id, m.name, o.orderDate, o.status, d.address)"
+                "select new jpabook.jpashop.jpaoptimization.repository.OrderSimpleQueryDto(o.id, m.name, o.orderDate, o.status, d.address)"
                         + " from Order o" +
                         " join o.member m" +
                         " join o.delivery d", OrderSimpleQueryDto.class)
+                .getResultList();
+    }
+
+    public List<Order> findAllWithItem() {
+        return em.createQuery(
+                "select distinct o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d" +
+                        " join fetch o.orderItems oi" +
+                        " join fetch oi.item i", Order.class)
+                .getResultList();
+    }
+
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class)
+                // orderItems, item에 대한 fetch join X. 지연 로딩 with Batch
+                .setFirstResult(offset)
+                .setMaxResults(limit)
                 .getResultList();
     }
 }
